@@ -348,7 +348,7 @@ The repository also supports multi-label encoding for future multi-disease class
 </p>
 
 <p align="center">
-  <img src="figures/label_distribution_data.png" width="60%">
+  <img src="figures/label_distribution_data.png" width="40%">
 </p>
 
 ---
@@ -364,7 +364,7 @@ The repository also supports multi-label encoding for future multi-disease class
 ### Stratified Validation Sampling
 
 <p align="center">
-  <img src="figures/Metadata Example of Training and Validation Subsets" width="90%">
+  <img src="figures/Metadata Example of Training and Validation Subsets.png" width="90%">
 </p>
 
 ---
