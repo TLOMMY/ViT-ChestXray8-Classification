@@ -117,43 +117,46 @@ python scripts/evaluate.py
 
 ```text
 ViT-ChestXray8-Classification/
+# Project Structure
+├── configs/             
+│   └── config.py        # Main configuration file (paths, hyperparameters, training settings)
 │
-├── configs/                      # Model and training configuration
-│   └── config.py
+├── docs/                
+│   ├── ViT Overview.pdf # ViT theoretical framework overview
+│   └── setup.md         # Environment setup and running instructions
 │
-├── scripts/                      # Training and evaluation scripts
-│   ├── train.py
-│   ├── evaluate.py
-│   └── inference.py
+├── figures/             # Visualizations and experiment result plots
+│   ├── Loss and Accuracy Curves on the Subdataset.png
+│   ├── Metadata Example of Training and Validation Subsets.png
+│   ├── Preprocessed Training Data Samples.png
+│   ├── Training Loss and Metrics on the Full Dataset.png
+│   ├── detailed engineering pipeline.png
+│   ├── label_distribution.png
+│   ├── label_distribution_data.png
+│   ├── overall pipeline.png
+│   ├── pixel_histogram.png
+│   └── vit architecture.png
 │
-├── vit_pipeline/                 # Core ViT implementation
-│   ├── data_loader.py
-│   ├── dataset.py
-│   ├── model.py
-│   ├── trainer.py
-│   ├── evaluation.py
-│   └── utils.py
+├── outputs/             
+│   ├── confusion_matrix(Samp).png  
+│   └── training_history(Samp).png          
 │
-├── notebooks/                    # Google Colab notebooks
-│   └── vit_chestxray_colab.ipynb
+├── scripts/             # Executable scripts
+│   ├── train.py         # Training script
+│   └── evaluate.py      # Evaluation script
 │
-├── docs/                         # Documentation and figures
-│   ├── images/
-│   ├── pipeline/
-│   ├── architecture/
-│   ├── reports/
-│   └── future_work.md
+├── src/                 # Core source code
+│   ├── __init__.py      # Package initialization
+│   ├── dataset.py       # Dataset loading and preprocessing
+│   ├── evaluate.py      # Evaluation logic
+│   ├── model.py         # ViT model definition
+│   ├── train.py         # Training loop implementation
+│   └── utils.py         # Utility functions (plotting, config parsing, etc.)
 │
-├── results/                      # Training outputs and plots
-│   ├── curves/
-│   ├── confusion_matrix/
-│   └── metrics/
-│
-├── checkpoints/                  # Saved model checkpoints
-│
-├── requirements.txt
-├── LICENSE
-└── README.md
+├── LICENSE              
+├── README.md            
+├── ViT_binary.ipynb     # Main Jupyter notebook
+└── requirements.txt     # Python dependencies
 ```
 
 ---
@@ -345,7 +348,7 @@ The repository also supports multi-label encoding for future multi-disease class
 </p>
 
 <p align="center">
-  <img src="figures/label_distribution_data.png" width="90%">
+  <img src="figures/label_distribution_data.png" width="60%">
 </p>
 
 ---
@@ -560,6 +563,7 @@ Wang, X. et al.
 
 We thank:
 
+* Alex for his full - process guidance and help.
 * NIH Clinical Center for releasing the ChestXray8 dataset
 * PyTorch developers
 * Google Colab for providing accessible GPU resources
@@ -568,7 +572,4 @@ We thank:
 ---
 
 # License
-
-This project is intended for educational and research purposes.
-
-Please check dataset licensing restrictions before commercial usage.
+MIT License
