@@ -550,12 +550,14 @@ Wang, X. et al.
 
 # Team Contributions
 
-| Team Member   | Contribution                                                             |
-| ------------- | ------------------------------------------------------------------------ |
-| team          | Project coordination, architecture analysis, README, experiment analysis |
-| Team Member 2 | Vision Transformer implementation                                        |
-| Team Member 3 | Dataset preprocessing and training                                       |
-| Team Member 4 | Evaluation metrics and visualization                                     |
+| Team Member   | Contribution                                                                                                                 |
+| ------------- | -----------------------------------------------------------------------------------------------------------------------------|
+| Jessie B      | Background and motivation                                                                                                    |
+| Beatriz Graça | Elaboration of methodology and collaborative training                                                                        |
+| Mashiro Yasuda| The construction of the overall ViT code, the main model trainers and data collectors.                                       |
+| Advik Iyer    | Experiment analysis                                                                                                          |
+| Advik Iyer    | Future Work                                                                                                                  |
+| Advik Iyer    | The full setup of the GitHub repository and the refactoring of the pipeline.                                                 |
 
 ---
 
