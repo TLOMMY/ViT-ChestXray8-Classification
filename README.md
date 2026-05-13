@@ -1,137 +1,574 @@
-# ViT-ChestXray8-Classification
+# ViT Chest X-ray Classification
+
 A repository for Novo Nordisk PBL course in BlendED AI+X program. We're team in track 1 from the session 2026.3.9-2026.5.14
 
 Track 1 is Vision Transformers (ViT) for Image Classification
 
 A research-oriented medical imaging project exploring the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestX-ray8 dataset.
 
+<p align="center">
+  <img src="docs/images/banner.png" width="100%" alt="ViT Chest X-ray Classification Banner">
+</p>
 
-## Project Description
+<h1 align="center">Vision Transformer for Chest X-ray Classification</h1>
 
-This project explores the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestX-ray8 dataset.
+<p align="center">
+A PyTorch-based Vision Transformer (ViT) project for binary chest X-ray classification using the NIH ChestX-ray8 dataset.
+</p>
 
-The project investigates how transformer-based deep learning architectures can be adapted for medical imaging tasks, with a particular focus on binary classification between normal and abnormal chest X-rays.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
+  <img src="https://img.shields.io/badge/PyTorch-2.0-red.svg">
+  <img src="https://img.shields.io/badge/Model-VisionTransformer-green.svg">
+  <img src="https://img.shields.io/badge/Dataset-NIHChestXray8-orange.svg">
+  <img src="https://img.shields.io/badge/Platform-GoogleColab-yellow.svg">
+</p>
 
-The project covers:
+---
 
-- medical image preprocessing
-- patient-level dataset stratification
-- Vision Transformer implementation
-- patch embedding and self-attention mechanisms
-- binary and multi-label classification
-- overfitting and class imbalance analysis
-- training efficiency on limited GPU environments such as Google Colab
+# Project Overview
 
-The Vision Transformer divides chest X-ray images into image patches, embeds them into lower-dimensional representations, and applies transformer encoder blocks with self-attention to learn spatial relationships between image regions.
+This project explores the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestXray8 dataset. The project focuses on understanding how transformer-based deep learning can be adapted for medical imaging tasks, particularly binary classification of normal versus abnormal chest X-rays.
 
-This repository documents the full workflow, preprocessing pipeline, model architecture, experimental setup, training observations, and future improvements for transformer-based medical image classification.
+The NIH ChestXray8 dataset contains over 112,000 chest X-ray images collected from more than 30,000 patients and includes labels for 14 thoracic diseases alongside a "No Finding" category. Due to the large volume of medical imaging data and the complexity of radiological interpretation, there is increasing interest in AI-assisted diagnostic systems that can support clinicians by improving speed, consistency, and scalability in medical image analysis.
 
-## Pipeline Overview
+Our project investigates:
 
-The complete workflow of the project is shown below:
+* Patient-level dataset splitting to avoid data leakage
+* Image preprocessing for medical imaging workflows
+* Vision Transformer implementation from scratch in PyTorch
+* Binary classification experiments on chest X-ray images
+* Training behavior under limited computational resources
+* Overfitting and class imbalance challenges in medical AI
+* Evaluation using Accuracy, Recall, F1-score, and Confusion Matrix
 
-Chest X-ray Image
-↓
-Data Preprocessing
-↓
-Patient Stratification
-↓
-Patch Extraction
-↓
-Patch Embedding
-↓
-Vision Transformer Encoder
-↓
-Classification Head
-↓
-Evaluation Metrics
+This repository is designed as a reproducible educational research project for understanding Vision Transformers in healthcare imaging.
 
-## Dataset
+---
 
-This project uses the NIH ChestX-ray8 dataset.
+# Key Features
 
-The dataset contains:
+* Vision Transformer implementation from scratch
+* Chest X-ray classification using NIH ChestXray8
+* Patient-level stratified train/validation split
+* Configurable binary classification pipeline
+* PyTorch-based training workflow
+* Google Colab compatible implementation
+* Evaluation with Recall and F1-score
+* Checkpoint saving and recovery system
+* Visualization of training curves and metrics
+* Experimental analysis of overfitting and class imbalance
 
-- 112,120 frontal chest X-ray images
-- 30,805 unique patients
-- 14 thoracic disease labels
-- "No Finding" normal category
+---
 
-The dataset is widely used for medical image classification research and weakly-supervised thoracic disease detection.
+# Quick Start
 
-Main labels used in experiments:
+## 1. Clone Repository
 
-- No Finding
-- Infiltration
+```bash
+git clone https://github.com/TLOMMY/ViT-ChestXray8-Classification.git
+cd ViT-ChestXray8-Classification
+```
 
-##Detailed Colab Workflow
+---
 
-### Preprocessing Examples
+## 2. Install Requirements
 
-Original and preprocessed chest X-ray images:
+```bash
+pip install -r requirements.txt
+```
 
-### Pixel Value Distribution
+---
 
-Pixel histograms were analyzed to verify normalization quality and grayscale intensity distribution.
+## 3. Download NIH ChestXray8 Dataset
 
-## Vision Transformer Architecture
+This project uses the NIH ChestXray8 dataset from Kaggle.
 
-The implemented Vision Transformer architecture contains:
+```python
+import kagglehub
 
-- Patch Embedding
-- Positional Encoding
-- CLS Token
-- Transformer Encoder Block
-- Multi-Head Self-Attention
-- Feed Forward Network (MLP)
-- Classification Head
+path = kagglehub.dataset_download("nih-chest-xrays/data")
+print(path)
+```
 
-### Final Experimental Configuration
+Dataset Link:
 
-| Parameter | Value |
-|---|---|
-| Image Size | 64 × 64 |
-| Patch Size | 16 × 16 |
-| Number of Heads | 4 |
-| Embedding Dimension | 32 |
-| MLP Dimension | 64 |
-| Batch Size | 64 |
-| Learning Rate | 0.01 |
-| Epochs | 150 |
+[https://www.kaggle.com/datasets/nih-chest-xrays/data](https://www.kaggle.com/datasets/nih-chest-xrays/data)
 
-## Results
+---
 
-Experimental results and evaluation metrics are currently being finalized.
+## 4. Run Training
 
-The final repository update will include:
+```bash
+python scripts/train.py
+```
 
-- Training and validation accuracy curves
-- Loss curves
-- Confusion matrix
-- Recall and F1-score analysis
-- Binary vs multi-label comparison
-- Overfitting analysis
+---
 
-## Experimental Analysis
+## 5. Run Evaluation
 
-Several important observations were identified during experimentation:
+```bash
+python scripts/evaluate.py
+```
 
-- Validation accuracy alone can be misleading under class imbalance.
-- Binary classification achieved significantly better performance than full multi-label classification.
-- Overfitting occurred rapidly on small subsets.
-- Training speed was heavily constrained by Google Colab GPU limitations.
-- Smaller image sizes improved speed but reduced medical detail retention.
+---
 
-## Future Work
+# Project Structure
 
-Potential future improvements include:
+```text
+ViT-ChestXray8-Classification/
+│
+├── configs/                      # Model and training configuration
+│   └── config.py
+│
+├── scripts/                      # Training and evaluation scripts
+│   ├── train.py
+│   ├── evaluate.py
+│   └── inference.py
+│
+├── vit_pipeline/                 # Core ViT implementation
+│   ├── data_loader.py
+│   ├── dataset.py
+│   ├── model.py
+│   ├── trainer.py
+│   ├── evaluation.py
+│   └── utils.py
+│
+├── notebooks/                    # Google Colab notebooks
+│   └── vit_chestxray_colab.ipynb
+│
+├── docs/                         # Documentation and figures
+│   ├── images/
+│   ├── pipeline/
+│   ├── architecture/
+│   ├── reports/
+│   └── future_work.md
+│
+├── results/                      # Training outputs and plots
+│   ├── curves/
+│   ├── confusion_matrix/
+│   └── metrics/
+│
+├── checkpoints/                  # Saved model checkpoints
+│
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
 
-- weighted loss functions
-- focal loss
-- pretrained Vision Transformers
-- improved class balancing
-- higher-resolution image training
-- larger GPU environments
-- advanced data augmentation
-- multi-label optimization
-- Grad-CAM visualization
+---
+
+# Pipeline Overview
+
+## Overall Workflow
+
+<p align="center">
+  <img src="figures/overall pipeline.png" width="100%" alt="Pipeline Overview">
+</p>
+
+The project pipeline consists of:
+
+1. Dataset Download and Loading
+2. Patient-level Stratified Splitting
+3. Image Preprocessing
+4. Label Encoding
+5. Vision Transformer Training
+6. Validation and Evaluation
+7. Metric Analysis and Visualization
+
+---
+
+## Detailed Engineering Pipeline
+
+<p align="center">
+  <img src="figures/detailed engineering pipeline.png" width="100%" alt="Pipeline Detials">
+</p>
+
+### Data Processing Steps
+
+* Download NIH ChestXray8 dataset
+* Group images by Patient ID
+* Perform patient-level stratified splitting
+* Prevent train/validation data leakage
+* Filter target disease labels
+* Convert labels into numerical format
+
+### Preprocessing Operations
+
+* Convert images to grayscale
+* Resize images from 1024×1024 to 64×64
+* Normalize pixel values to [0,1]
+* Convert images to PyTorch tensors
+* Load images using DataLoader
+
+### ViT Components
+
+* Patch Embedding
+* CLS Token
+* Positional Encoding
+* Multi-Head Self Attention
+* Transformer Encoder Blocks
+* MLP Classification Head
+
+### Training Features
+
+* Adam Optimizer
+* CrossEntropyLoss
+* Validation Monitoring
+* Checkpoint Saving
+* Accuracy / Recall / F1-score Tracking
+* Confusion Matrix Evaluation
+
+---
+
+## Vision Transformer Pipeline
+
+<p align="center">
+  <img src="figures/vit architecture.png" width="90%" alt="ViT Pipeline">
+</p>
+
+---
+
+## Final Experimental Configuration
+
+| Parameter           | Value            |
+| ------------------- | ---------------- |
+| Image Size          | 64 × 64          |
+| Patch Size          | 16 × 16          |
+| Batch Size          | 64               |
+| Num Heads           | 4                |
+| Embedding Dimension | 32               |
+| MLP Dimension       | 64               |
+| Transformer Layers  | 1                |
+| Optimizer           | Adam             |
+| Learning Rate       | 0.01             |
+| Loss Function       | CrossEntropyLoss |
+| Epochs              | 150              |
+| Framework           | PyTorch          |
+| Platform            | Google Colab     |
+
+---
+
+# Dataset
+
+## NIH ChestXray8 Dataset
+
+This project uses the NIH ChestXray8 dataset, a large-scale chest X-ray dataset released by the National Institutes of Health (NIH).
+
+Dataset Statistics:
+
+| Item           | Value                |
+| -------------- | -------------------- |
+| Total Images   | 112,120              |
+| Patients       | 30,000+              |
+| Disease Labels | 14                   |
+| Imaging Type   | Frontal Chest X-rays |
+| Dataset Source | NIH Clinical Center  |
+
+The dataset includes thoracic disease labels such as:
+
+* Atelectasis
+* Cardiomegaly
+* Effusion
+* Infiltration
+* Mass
+* Nodule
+* Pneumonia
+* Pneumothorax
+* No Finding
+
+---
+
+## Dataset Reference
+
+Wang, X. et al.
+
+"ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases"
+
+[https://arxiv.org/abs/1705.02315](https://arxiv.org/abs/1705.02315)
+
+Kaggle Dataset:
+
+[https://www.kaggle.com/datasets/nih-chest-xrays/data](https://www.kaggle.com/datasets/nih-chest-xrays/data)
+
+---
+
+# Data Preprocessing
+
+## Patient-Level Stratified Split
+
+To avoid data leakage, images were split at the patient level instead of image level.
+
+This ensures:
+
+* The same patient does not appear in both training and validation sets
+* Better generalization evaluation
+* More realistic medical AI experiments
+
+---
+
+## Label Encoding
+
+Binary classification experiments were conducted using:
+
+* No Finding
+* Infiltration
+
+Labels were converted into numerical format:
+
+```python
+{"No Finding": 0, "Infiltration": 1}
+```
+
+---
+
+## Multi-hot Encoding
+
+The repository also supports multi-label encoding for future multi-disease classification experiments.
+
+---
+
+## Preprocessing Visualization
+
+### Sample Preprocessed Images
+
+<p align="center">
+  <img src="figures/Preprocessed Training Data Samples.png" width="90%">
+</p>
+
+---
+
+### Label Distribution
+
+<p align="center">
+  <img src="figures/label_distribution.png" width="90%">
+</p>
+
+<p align="center">
+  <img src="figures/label_distribution_data.png" width="90%">
+</p>
+
+---
+
+### Pixel Histogram Analysis
+
+<p align="center">
+  <img src="figures/pixel_histogram.png" width="90%">
+</p>
+
+---
+
+### Stratified Validation Sampling
+
+<p align="center">
+  <img src="figures/Metadata Example of Training and Validation Subsets" width="90%">
+</p>
+
+---
+
+# Experimental Setup
+
+## Small Dataset Experiment
+
+Initial experiments were conducted using:
+
+| Dataset Split  | Images |
+| -------------- | ------ |
+| Training Set   | 1,000  |
+| Validation Set | 200    |
+
+The purpose of this stage was:
+
+* Faster iteration cycles
+* Architecture debugging
+* Hyperparameter testing
+* Training behavior analysis
+
+---
+
+## Full Dataset Experiment
+
+Larger experiments were later conducted using:
+
+| Dataset Split  | Images |
+| -------------- | ------ |
+| Training Set   | 10,000 |
+| Validation Set | 2,000  |
+
+The full dataset experiments focused on:
+
+* Reducing overfitting
+* Improving generalization
+* Evaluating Recall and F1-score
+* Measuring scalability limitations in Google Colab
+
+---
+
+## Hyperparameter Experiments
+
+Several configurations were tested:
+
+| Num Heads | Embed Dim | MLP Dim | Result              |
+| --------- | --------- | ------- | ------------------- |
+| 1         | 16        | 16      | Poor convergence    |
+| 4         | 32        | 64      | Best performance    |
+| 8         | 32        | 64      | Slower and unstable |
+
+Observations:
+
+* 4 attention heads performed better than 8 heads
+* Smaller images improved training speed
+* High learning rate caused instability
+* Validation accuracy plateaued due to overfitting and imbalance
+
+---
+
+# Results
+
+## Training Curves
+
+<p align="center">
+  <img src="docs/results/training_curves.png" width="100%">
+</p>
+
+---
+
+## Validation Metrics
+
+<p align="center">
+  <img src="docs/results/metrics_curve.png" width="100%">
+</p>
+
+---
+
+## Final Metrics
+
+| Metric              | Result |
+| ------------------- | ------ |
+| Training Accuracy   | TBD    |
+| Validation Accuracy | TBD    |
+| Recall              | TBD    |
+| F1-score            | TBD    |
+
+---
+
+## Confusion Matrix
+
+<p align="center">
+  <img src="docs/results/confusion_matrix.png" width="60%">
+</p>
+
+---
+
+# Discussion & Limitations
+
+## Key Findings
+
+* Vision Transformers can be adapted for medical imaging tasks
+* Patient-level splitting is critical for realistic evaluation
+* Validation performance is sensitive to dataset balance
+* Smaller image sizes improve speed but reduce medical detail
+* Google Colab hardware limitations significantly affect experimentation speed
+
+---
+
+## Main Challenges
+
+### Overfitting
+
+The model achieved very high training accuracy while validation performance stagnated, indicating overfitting.
+
+---
+
+### Class Imbalance
+
+The NIH ChestXray8 dataset contains significantly more "No Finding" images than disease-positive images.
+
+This can artificially inflate accuracy metrics.
+
+For this reason, Recall and F1-score were introduced to better evaluate medical classification performance.
+
+---
+
+### Computational Constraints
+
+Training Vision Transformers on high-resolution medical images requires significant GPU memory and training time.
+
+Google Colab limitations affected:
+
+* Epoch duration
+* Batch size selection
+* Input image resolution
+* Number of experiments
+
+---
+
+# Future Work
+
+Future improvements planned for this project include:
+
+* Multi-label disease classification
+* Transfer learning using pretrained ViT models
+* Higher-resolution medical image training
+* Data augmentation techniques
+* Better class balancing strategies
+* Grad-CAM explainability visualization
+* Advanced transformer architectures
+* Mixed precision training for speed optimization
+* Comparison with CNN-based models
+* Deployment as a lightweight medical AI demo
+
+
+```
+
+---
+
+# References
+
+## Vision Transformer
+
+Dosovitskiy, A. et al.
+
+"An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale"
+
+[https://arxiv.org/abs/2010.11929](https://arxiv.org/abs/2010.11929)
+
+---
+
+## NIH ChestXray8
+
+Wang, X. et al.
+
+"ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases"
+
+[https://arxiv.org/abs/1705.02315](https://arxiv.org/abs/1705.02315)
+
+---
+
+# Team Contributions
+
+| Team Member   | Contribution                                                             |
+| ------------- | ------------------------------------------------------------------------ |
+| team          | Project coordination, architecture analysis, README, experiment analysis |
+| Team Member 2 | Vision Transformer implementation                                        |
+| Team Member 3 | Dataset preprocessing and training                                       |
+| Team Member 4 | Evaluation metrics and visualization                                     |
+
+---
+
+# Acknowledgements
+
+We thank:
+
+* NIH Clinical Center for releasing the ChestXray8 dataset
+* PyTorch developers
+* Google Colab for providing accessible GPU resources
+* Open-source medical AI research communities
+
+---
+
+# License
+
+This project is intended for educational and research purposes.
+
+Please check dataset licensing restrictions before commercial usage.
