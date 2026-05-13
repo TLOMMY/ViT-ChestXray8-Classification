@@ -556,8 +556,8 @@ Wang, X. et al.
 | Beatriz Graça | Elaboration of methodology and collaborative training                                                                        |
 | Mashiro Yasuda| The construction of the overall ViT code, the main model trainers and data collectors.                                       |
 | Advik Iyer    | Experiment analysis                                                                                                          |
-| Advik Iyer    | Future Work                                                                                                                  |
-| Advik Iyer    | The full setup of the GitHub repository and the refactoring of the pipeline.                                                 |
+| Zhuoming Liang| Future Work                                                                                                                  |
+| Bowen Liu     | The full setup of the GitHub repository and the refactoring of the pipeline.                                                 |
 
 ---
 
