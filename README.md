@@ -7,7 +7,7 @@ Track 1 is Vision Transformers (ViT) for Image Classification
 A research-oriented medical imaging project exploring the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestX-ray8 dataset.
 
 <p align="center">
-  <img src="figures/Coverc.jpg" width="100%" alt="ViT Chest X-ray Binary Classification">
+  <img src="figures/Cover.jpg" width="100%" alt="ViT Chest X-ray Binary Classification">
 </p>
 
 <h1 align="center">Vision Transformer for Chest X-ray Classification</h1>
