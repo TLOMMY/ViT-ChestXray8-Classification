@@ -522,6 +522,10 @@ A smaller binary classification experiment was also conducted using:
 
 ### Small Subset Results
 
+<p align="center">
+  <img src="figures/Training Loss and Metrics on the Subdataset.png" width="100%">
+</p>
+
 | Metric | Value |
 |---|---|
 | Training Accuracy | ~96% |
