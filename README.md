@@ -675,7 +675,12 @@ Team Contributions
 
 | Team Member   | Contribution                                                                                                                 |
 | ------------- | -----------------------------------------------------------------------------------------------------------------------------|
-| 
+| Jessie B      | Background and motivation                                                                                                    |
+| Beatriz Graça | Methodology                                                                                                                  |
+| Mashiro Yasuda| Construction of the ViT code, Data collection                                                                                |
+| Advik Iyer    | Experiment analysis                                                                                                          |
+| Zhuoming Liang| Future Work                                                                                                                  |
+| Bowen Liu     | The full Setup of the GitHub repository, Pipeline refactoring                                                                |
 
 ---
 
