@@ -472,7 +472,7 @@ For this reason, F1-score, Recall, ROC-AUC, and Confusion Matrix analysis were i
 ## Confusion Matrix
 
 <p align="center">
-  <img src="figures/confusion matrix.png" width="60%">
+  <img src="figures/Confusion matrix.png" width="60%">
 </p>
 
 ### Validation Set Results
