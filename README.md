@@ -1,10 +1,8 @@
 # ViT Chest X-ray Classification
 
-A repository for Novo Nordisk PBL course in BlendED AI+X program. We're team in track 1 from the session 2026.3.9-2026.5.14
+A research-oriented medical imaging project exploring the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestX-ray8 dataset. 
 
-Track 1 is Vision Transformers (ViT) for Image Classification
-
-A research-oriented medical imaging project exploring the application of Vision Transformers (ViTs) for automated chest X-ray classification using the NIH ChestX-ray8 dataset.
+This project is part of the Novo Nordisk Project for AI and Computer Vision in Biotech by BlendED from March 9th to May 14th, 2026.
 
 <p align="center">
   <img src="figures/Cover.jpg" width="100%" alt="ViT Chest X-ray Binary Classification">
@@ -431,35 +429,109 @@ Observations:
 ## Training Curves
 
 <p align="center">
-  <img src="docs/results/training_curves.png" width="100%">
+  <img src="figures/Training Loss and Metrics on the Full Dataset.png" width="100%">
 </p>
+
+### Observations
+
+| Metric              | Observation                               |
+|---------------------|-------------------------------------------|
+| Training Loss       | Gradually decreased throughout training   |
+| Training Accuracy   | Increased steadily during training        |
+| Validation Accuracy | Plateaued around 64%                      |
+| Validation F1-score | Peaked near epoch 30 then slowly declined |
+| Validation Recall   | Fluctuated across epochs                  |
+
+### Interpretation
+
+The training curves indicate clear signs of overfitting after approximately epoch 30.  
+While training accuracy continued to improve, validation performance stopped improving and began fluctuating.
+
+This suggests that the model gradually memorized training samples instead of learning generalized radiological features.
 
 ---
 
 ## Validation Metrics
 
-<p align="center">
-  <img src="docs/results/metrics_curve.png" width="100%">
-</p>
+| Metric | Best Value |
+|---|---|
+| Training Accuracy | ~67% |
+| Validation Accuracy | ~64% |
+| Validation F1-score | ~64% |
+| Validation Recall | ~59% |
+| ROC-AUC | ~0.66 |
 
----
+### Notes
 
-## Final Metrics
+Validation accuracy alone was not sufficient for evaluating the model because the dataset was imbalanced between “No Finding” and “Infiltration” labels.
 
-| Metric              | Result |
-| ------------------- | ------ |
-| Training Accuracy   | TBD    |
-| Validation Accuracy | TBD    |
-| Recall              | TBD    |
-| F1-score            | TBD    |
+For this reason, F1-score, Recall, ROC-AUC, and Confusion Matrix analysis were included to better evaluate model behavior.
 
 ---
 
 ## Confusion Matrix
 
 <p align="center">
-  <img src="docs/results/confusion_matrix.png" width="60%">
+  <img src="figures/confusion_matrix.png" width="60%">
 </p>
+
+### Validation Set Results
+
+| True Label | Predicted No Finding | Predicted Infiltration |
+|---|---|---|
+| No Finding | 4453 | 1780 |
+| Infiltration | 2734 | 3040 |
+
+### Key Findings
+
+The model performed better on the majority class (“No Finding”) than on the minority abnormal class (“Infiltration”).
+
+A large number of false negatives were observed, meaning many abnormal chest X-rays were incorrectly classified as normal.
+
+This is particularly problematic in medical AI systems because missed abnormal cases may delay diagnosis and treatment.
+
+---
+
+## ROC Curve
+
+<p align="center">
+  <img src="figures/roc_curve.png" width="60%">
+</p>
+
+| Metric | Value |
+|---|---|
+| AUC | 0.66 |
+
+### Interpretation
+
+The ROC curve demonstrates that the model performs better than random guessing, but its discriminative ability remains limited.
+
+The relatively low AUC indicates that the lightweight Vision Transformer struggled to reliably separate normal and abnormal chest X-rays under the current training configuration.
+
+---
+
+## Small Dataset Experiment
+
+A smaller binary classification experiment was also conducted using:
+
+- 1,000 training images
+- 200 validation images
+- Labels:
+  - No Finding
+  - Infiltration
+
+### Small Subset Results
+
+| Metric | Value |
+|---|---|
+| Training Accuracy | ~96% |
+| Validation Accuracy | ~80% |
+
+Although these results initially appeared promising, further analysis suggested that class imbalance heavily influenced the accuracy score.
+
+Because “No Finding” samples significantly outnumbered “Infiltration” samples, the model could achieve high accuracy by favoring majority-class predictions.
+
+This experiment highlighted the importance of using Recall and F1-score instead of relying only on accuracy in medical classification tasks.
 
 ---
 
@@ -467,42 +539,123 @@ Observations:
 
 ## Key Findings
 
-* Vision Transformers can be adapted for medical imaging tasks
-* Patient-level splitting is critical for realistic evaluation
-* Validation performance is sensitive to dataset balance
-* Smaller image sizes improve speed but reduce medical detail
-* Google Colab hardware limitations significantly affect experimentation speed
+This project demonstrated that Vision Transformers can be applied to chest X-ray classification, but several important limitations emerged during experimentation.
+
+The model successfully learned basic image patterns and achieved moderate validation performance; however, generalization remained limited due to multiple constraints related to data imbalance, model capacity, and computational resources.
 
 ---
 
 ## Main Challenges
 
-### Overfitting
-
-The model achieved very high training accuracy while validation performance stagnated, indicating overfitting.
-
----
-
-### Class Imbalance
-
-The NIH ChestXray8 dataset contains significantly more "No Finding" images than disease-positive images.
-
-This can artificially inflate accuracy metrics.
-
-For this reason, Recall and F1-score were introduced to better evaluate medical classification performance.
+| Challenge | Impact |
+|---|---|
+| Class imbalance | Model biased toward predicting “No Finding” |
+| Low image resolution (64×64) | Fine pathological details were lost |
+| Lightweight ViT architecture | Limited feature extraction capability |
+| Hardware limitations | Restricted larger experiments and higher-resolution training |
+| Limited training resources | Prevented extensive hyperparameter tuning |
 
 ---
 
-### Computational Constraints
+## Why Accuracy Alone Was Misleading
 
-Training Vision Transformers on high-resolution medical images requires significant GPU memory and training time.
+One important finding was that validation accuracy alone did not accurately reflect clinical usefulness.
 
-Google Colab limitations affected:
+Because the dataset contained significantly more “No Finding” samples than “Infiltration” samples, the model could obtain relatively high accuracy while still failing to correctly detect many abnormal cases.
 
-* Epoch duration
-* Batch size selection
-* Input image resolution
-* Number of experiments
+For this reason, additional evaluation metrics such as:
+
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion Matrix
+
+were necessary to better understand the model’s behavior.
+
+This revealed that the model struggled particularly with sensitivity toward abnormal findings.
+
+---
+
+## Overfitting Behavior
+
+The training curves showed a growing gap between training and validation performance during later epochs.
+
+This indicates that the model gradually memorized training samples instead of learning generalized radiological representations.
+
+The overfitting issue became especially visible after approximately epoch 30, where validation F1-score and Recall stopped improving despite continued decreases in training loss.
+
+---
+
+## Resolution Trade-off
+
+Due to Google Colab GPU limitations, chest X-ray images were resized from:
+
+- Original resolution: 1024×1024
+- Training resolution: 64×64
+
+Although this significantly reduced training time and memory usage, it also removed important medical details such as:
+
+- subtle infiltrates
+- texture patterns
+- fine opacity regions
+
+This likely reduced the model’s ability to distinguish pathological findings.
+
+---
+
+## Architectural Limitations
+
+Compared to standard Vision Transformer architectures, the implemented model used:
+
+| Standard ViT | Our Configuration |
+|---|---|
+| 12 Transformer layers | 1 layer |
+| 768 embedding dimension | 32 |
+| 224×224 input | 64×64 input |
+| Large-scale pretraining | No pretraining |
+
+The simplified architecture was necessary for resource constraints, but it also limited representation learning capacity.
+
+---
+
+## Future Improvements
+
+<p align="center">
+  <img src="figures/future_work_pipeline.png" width="90%">
+</p>
+
+Future work may include:
+
+### Data Improvements
+- Balance class distributions using oversampling or weighted loss
+- Apply stronger augmentation techniques
+- Use larger and cleaner subsets
+
+### Training Improvements
+- Add early stopping
+- Tune learning rate and batch size
+- Introduce transfer learning with pretrained ViT weights
+- Use Focal Loss for imbalance handling
+
+### Evaluation Improvements
+- Perform threshold tuning
+- Use k-fold cross-validation
+- Evaluate on external datasets
+- Analyze patient-level performance consistency
+
+---
+
+## Final Reflection
+
+Although the final performance did not reach clinically deployable levels, this project successfully demonstrated:
+
+- the complete Vision Transformer pipeline,
+- medical image preprocessing,
+- patient-level dataset splitting,
+- transformer-based classification,
+- and comprehensive evaluation using multiple medical AI metrics.
+
+More importantly, the project provided valuable insight into the practical challenges of applying lightweight Vision Transformers to medical imaging tasks under limited computational resources.
 
 ---
 
