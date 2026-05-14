@@ -523,7 +523,7 @@ A smaller binary classification experiment was also conducted using:
 ### Small Subset Results
 
 <p align="center">
-  <img src="figures/Training Loss and Metrics on the Subdataset.png" width="100%">
+  <img src="figures/Loss and Accuracy Curves on the Subdataset.png" width="100%">
 </p>
 
 | Metric | Value |
