@@ -618,47 +618,6 @@ The simplified architecture was necessary for resource constraints, but it also 
 
 ---
 
-## Future Improvements
-
-<p align="center">
-  <img src="figures/future_work_pipeline.png" width="90%">
-</p>
-
-Future work may include:
-
-### Data Improvements
-- Balance class distributions using oversampling or weighted loss
-- Apply stronger augmentation techniques
-- Use larger and cleaner subsets
-
-### Training Improvements
-- Add early stopping
-- Tune learning rate and batch size
-- Introduce transfer learning with pretrained ViT weights
-- Use Focal Loss for imbalance handling
-
-### Evaluation Improvements
-- Perform threshold tuning
-- Use k-fold cross-validation
-- Evaluate on external datasets
-- Analyze patient-level performance consistency
-
----
-
-## Final Reflection
-
-Although the final performance did not reach clinically deployable levels, this project successfully demonstrated:
-
-- the complete Vision Transformer pipeline,
-- medical image preprocessing,
-- patient-level dataset splitting,
-- transformer-based classification,
-- and comprehensive evaluation using multiple medical AI metrics.
-
-More importantly, the project provided valuable insight into the practical challenges of applying lightweight Vision Transformers to medical imaging tasks under limited computational resources.
-
----
-
 # Future Work
 
 ##Data
