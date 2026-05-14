@@ -508,27 +508,38 @@ Google Colab limitations affected:
 
 # Future Work
 
-Future improvements planned for this project include:
+##Data
 
-* Multi-label disease classification
-* Transfer learning using pretrained ViT models
-* Higher-resolution medical image training
-* Data augmentation techniques
-* Better class balancing strategies
-* Grad-CAM explainability visualization
-* Advanced transformer architectures
-* Mixed precision training for speed optimization
-* Comparison with CNN-based models
-* Deployment as a lightweight medical AI demo
+*  Class balancing with weighted sampling
+*  Stronger data augmentation
+  (Rotation, Flipping, MixUp, CutMix)
+* Higher-resolution chest X-ray inputs
 
+##Training
+
+* Early stopping to reduce overfitting
+* Learning rate and batch size tuning
+* Transfer learning with pretrained ViT
+* Mixed precision training for faster experiments
+
+##Evaluation
+
+* Threshold tuning for classification
+* K-fold cross-validation
+*  Grad-CAM explainability visualization
+
+Future research direction ：
+* Multi - Class Classification
+* Advanced Vision Transformer Architectures
+* Multi - Label Classification
 
 ```
 
 ---
 
-# References
+References
 
-## Vision Transformer
+Vision Transformer
 
 Dosovitskiy, A. et al.
 
@@ -538,7 +549,7 @@ Dosovitskiy, A. et al.
 
 ---
 
-## NIH ChestXray8
+NIH ChestXray8
 
 Wang, X. et al.
 
@@ -548,20 +559,15 @@ Wang, X. et al.
 
 ---
 
-# Team Contributions
+Team Contributions
 
 | Team Member   | Contribution                                                                                                                 |
 | ------------- | -----------------------------------------------------------------------------------------------------------------------------|
-| Jessie B      | Project coordination,Background and motivation                                                                               |
-| Beatriz Graça | Elaboration of methodology and collaborative training                                                                        |
-| Mashiro Yasuda| The construction of the overall ViT code, the main model trainers and data collectors.                                       |
-| Advik Iyer    | Experiment analysis                                                                                                          |
-| Zhuoming Liang| Future Work                                                                                                                  |
-| Bowen Liu     | The full setup of the GitHub repository and the refactoring of the pipeline.                                                 |
+| 
 
 ---
 
-# Acknowledgements
+Acknowledgements
 
 We thank:
 
@@ -573,5 +579,5 @@ We thank:
 
 ---
 
-# License
+License
 MIT License
